@@ -24,17 +24,17 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    // Mensagem de boas-vindas inicial
-    setTimeout(() => {
-      addChatMessage({
-        id: Date.now(),
-        text: "Olá! Bem-vindo à Escola de Inglês! 🎓\n\nComo posso ajudá-lo hoje?",
-        isBot: true,
-        timestamp: new Date()
-      });
-      setShowOptions(true);
-    }, 1000);
-  }, []);
+    // Mensagem de boas-vindas inicial - apenas uma vez
+    const welcomeMessage = {
+      id: Date.now(),
+      text: "Olá! Bem-vindo à Escola de Inglês! 🎓\n\nComo posso ajudá-lo hoje?",
+      isBot: true,
+      timestamp: new Date()
+    };
+    
+    setChatMessages([welcomeMessage]);
+    setShowOptions(true);
+  }, []); // Array de dependências vazio garante que execute apenas uma vez
 
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
