@@ -67,12 +67,10 @@ const Chat = () => {
       response += "Digite o número do plano para mais detalhes ou 'voltar' para outras opções.";
       newStep = 'plans';
     } else if (message.includes('2') || message.includes('promoções') || message.includes('cupons')) {
-      response = "🎁 **Cupons de Desconto Ativos:**\n\n";
-      coupons.forEach(coupon => {
-        response += `**${coupon.code}** - ${coupon.discount}% de desconto\n`;
-        response += `${coupon.description}\n\n`;
-      });
-      response += "Digite o código do cupom para aplicá-lo ou 'voltar' para outras opções.";
+      response = "🎁 **Cupons de Desconto:**\n\n";
+      response += "Se você possui um cupom de desconto, digite o código para verificar se é válido.\n\n";
+      response += "Exemplo: BEMVINDO20\n\n";
+      response += "Digite o código do cupom ou 'voltar' para outras opções.";
       newStep = 'coupons';
     } else if (message.includes('3') || message.includes('contato') || message.includes('falar')) {
       response = "📞 **Informações de Contato:**\n\n";
@@ -100,20 +98,26 @@ const Chat = () => {
       response += "Um de nossos especialistas entrará em contato em breve!\n";
       response += "Enquanto isso, posso ajudá-lo com outras informações.";
       newStep = 'attendant';
-    } else if (newStep === 'plans' && /^[1-3]$/.test(message)) {
+    } else if (newStep === 'plans' && /^[1-9]$/.test(message)) {
       const planIndex = parseInt(message) - 1;
       const plan = plans[planIndex];
-      response = `📋 **${plan.name}**\n\n`;
-      response += `**Descrição:** ${plan.description}\n`;
-      response += `**Duração:** ${plan.duration}\n`;
-      response += `**Preço:** R$ ${plan.price.toFixed(2)}\n`;
-      response += `**Preço Original:** R$ ${plan.originalPrice.toFixed(2)}\n`;
-      response += `**Desconto:** ${plan.discount}%\n\n`;
-      response += `**Inclui:**\n`;
-      plan.features.forEach(feature => {
-        response += `✅ ${feature}\n`;
-      });
-      response += `\nPara aplicar um cupom, digite o código ou 'voltar' para outros planos.`;
+      if (plan) {
+        response = `📋 **${plan.name}**\n\n`;
+        response += `**Descrição:** ${plan.description}\n`;
+        response += `**Duração:** ${plan.duration}\n`;
+        response += `**Número de aulas:** ${plan.numberOfClasses}\n`;
+        response += `**Duração da aula:** ${plan.classDuration}\n`;
+        response += `**Preço:** R$ ${plan.price.toFixed(2)}\n`;
+        response += `**Preço Original:** R$ ${plan.originalPrice.toFixed(2)}\n`;
+        response += `**Desconto:** ${plan.discount}%\n\n`;
+        response += `**Inclui:**\n`;
+        plan.features.forEach(feature => {
+          response += `✅ ${feature}\n`;
+        });
+        response += `\nPara aplicar um cupom, digite o código ou 'voltar' para outros planos.`;
+      } else {
+        response = "❌ Plano não encontrado. Digite um número válido ou 'voltar' para outras opções.";
+      }
     } else if (newStep === 'coupons' && message.length > 0) {
       const coupon = coupons.find(c => c.code.toLowerCase() === message.toLowerCase());
       if (coupon) {

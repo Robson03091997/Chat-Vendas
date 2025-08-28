@@ -4,6 +4,8 @@ export const plans = [
     name: "Básico",
     description: "Curso fundamental de inglês para iniciantes",
     duration: "6 meses",
+    numberOfClasses: 48,
+    classDuration: "60 minutos",
     price: 199.90,
     originalPrice: 299.90,
     features: [
@@ -13,6 +15,7 @@ export const plans = [
       "Certificado de conclusão",
       "Suporte via chat"
     ],
+    availableCoupons: ["BEMVINDO20", "FAMILIA15"],
     isPopular: false,
     discount: 33
   },
@@ -21,6 +24,8 @@ export const plans = [
     name: "Intermediário",
     description: "Aperfeiçoe seu inglês com aulas avançadas",
     duration: "8 meses",
+    numberOfClasses: 96,
+    classDuration: "75 minutos",
     price: 299.90,
     originalPrice: 399.90,
     features: [
@@ -32,6 +37,7 @@ export const plans = [
       "Aulas de conversação",
       "Simulados de certificação"
     ],
+    availableCoupons: ["BEMVINDO20", "PROMO30", "FAMILIA15"],
     isPopular: true,
     discount: 25
   },
@@ -40,6 +46,8 @@ export const plans = [
     name: "Avançado",
     description: "Domine o inglês com fluência nativa",
     duration: "12 meses",
+    numberOfClasses: 192,
+    classDuration: "90 minutos",
     price: 499.90,
     originalPrice: 699.90,
     features: [
@@ -53,6 +61,7 @@ export const plans = [
       "Preparação para TOEFL/IELTS",
       "Aulas particulares mensais"
     ],
+    availableCoupons: ["BEMVINDO20", "PROMO30"],
     isPopular: false,
     discount: 29
   }

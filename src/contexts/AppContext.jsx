@@ -32,6 +32,8 @@ function appReducer(state, action) {
       return { ...state, appliedCoupon: null };
     case 'UPDATE_PLANS':
       return { ...state, plans: action.payload };
+    case 'ADD_PLAN':
+      return { ...state, plans: [...state.plans, action.payload] };
     case 'UPDATE_COUPONS':
       return { ...state, coupons: action.payload };
     default:
@@ -70,6 +72,10 @@ export function AppProvider({ children }) {
     dispatch({ type: 'UPDATE_PLANS', payload: newPlans });
   };
 
+  const addPlan = (newPlan) => {
+    dispatch({ type: 'ADD_PLAN', payload: newPlan });
+  };
+
   const updateCoupons = (newCoupons) => {
     dispatch({ type: 'UPDATE_COUPONS', payload: newCoupons });
   };
@@ -83,6 +89,7 @@ export function AppProvider({ children }) {
     applyCoupon,
     removeCoupon,
     updatePlans,
+    addPlan,
     updateCoupons
   };
 
