@@ -1,0 +1,8 @@
+@import './styles/main.css';
+@import './styles/chat.css';
+@import './styles/admin.css';
+
+/* Estilos específicos do App */
+.App {
+  min-height: 100vh;
+}
